@@ -1,25 +1,22 @@
 #!/bin/bash
 
 # get workspace numbers
-WS_STRING=$(i3-msg -t get_workspaces   | jq '.[] | (.num)')
-WS_ARRAY=()
+WS=10 
+WS_free=''
+count=0
+ws_cnt=''
+for ws in $(wmctrl -d | cut -d ' ' -f 1 )
+do
+	ws_cnt = $ws
+	if [[ $count -ne $ws ]]; then  
+		WS_free = $ws
+		break
+	fi
+	(( count++ )) 
+done
+[[ -z $WS_free ]] && (( WS_free = $ws_cnt + 1 ))
 
-# put workspace numbers into array
-for ws in $WS_STRING; do WS_ARRAY+=($ws); done
-
-# list of all possible workspaces (change if you have more)
-ALL_WS=({1..10})
-
-
-# return 0 if element in array, 1 otherwise
-containsElement () {
-  local e match="$1"
-  shift
-  for e; do [[ "$e" == "$match" ]] && return 0; done
-  return 1
-}
-
-
+exit
 # check for move container flag
 moveContainer=false
 while getopts 'm' opt; do
