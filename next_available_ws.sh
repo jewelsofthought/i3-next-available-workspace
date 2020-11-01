@@ -11,7 +11,6 @@
 # anti-spam methodologies, to the sraping and data-warehousing ones, 
 # and all inbetween.
 
-
 i3config="$HOME/.config/i3/config"
 #i3config="/tmp/y.sh"
 
@@ -71,7 +70,7 @@ moveContainer () {
 	local ws=$1
 	ACTIVE_WIN=$(xprop -id $(xdotool getactivewindow) | grep 'WM_NAME(STRING)' | cut -d'"' -f2)
 	i3-msg move container to workspace $ws
-	wmctrl -r $ACTIVE_WIN -b add,demands_attention
+	i3-msg workspace $ws
 }
 
 WS_free=$(getWorkspaceFree)
