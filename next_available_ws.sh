@@ -38,6 +38,7 @@ getWorkspaceConfigNames () {
 getWorkspaceFree() {
 	local pcount=0
 
+	re_json='"
 	for ws_num in $(i3-msg -t get_workspaces | jq '.[] | (.num)') 
 	do	
 		[[ $ws_num -gt 0 ]] && (( pcount++ ))
