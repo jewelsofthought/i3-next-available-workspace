@@ -4,8 +4,6 @@ Simple bash script to open new workspace in i3 tiling window manager without hav
 
 ## Dependencies
 - xprop
-- xdotool
-- wmctrl
 
 ## Usage
 Make sure the script is executable.

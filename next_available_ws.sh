@@ -38,7 +38,6 @@ getWorkspaceConfigNames () {
 getWorkspaceFree() {
 	local pcount=0
 
-	re_json='"
 	for ws_num in $(i3-msg -t get_workspaces | jq '.[] | (.num)') 
 	do	
 		[[ $ws_num -gt 0 ]] && (( pcount++ ))
@@ -56,20 +55,20 @@ getWorkspaceFree() {
 # Now we have to deal with a new - although, perhaps personal - problem.
 # What if the "next" workspace has a name defined in i3config? 
 # Shouldn't I use that name, and not just add another digit. 
-# Besides it looking bad... Now I could require the use to add the 
+# Besides it looking bad... Now I could require the use to add that
 # to a config file, but that is a laborious process. Instead, I will
 # parse i3config (using i-msg) and extract the relevant names, if 
 # existing. 
 # TODO (perhaps):
 # Add an -c option to allow for a different config file. I would not 
 # care what else it has in it, so it could just have the copied over 
-# into this file. The best would be for it to be a .sh file that I just
+# into this file. The best would be for it to be a .sh file that I 
+# just include
 
 
 # if -m flag is passed, move current container to new workspace
 moveContainer () {
 	local ws=$1
-	ACTIVE_WIN=$(xprop -id $(xdotool getactivewindow) | grep 'WM_NAME(STRING)' | cut -d'"' -f2)
 	i3-msg move container to workspace $ws
 	i3-msg workspace $ws
 }
