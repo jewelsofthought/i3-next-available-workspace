@@ -1,18 +1,6 @@
 #!/bin/bash
-# TODO:
-# Fix move container 
-# How about a computer "interpreter" that writes it in any
-# psuedo fashion, and it will attempt to write it in a certain 
-# language paradigm. Instead of sticking to these formal markdown 
-# languages, how about a simple user language that the AI interpretor 
-# takes a best "guess" at. If you need to amend the language itself 
-# (or customise the interpreter, you should be able to "teach" it. 
-# For already we have advanced far upon this road, from the email 
-# anti-spam methodologies, to the sraping and data-warehousing ones, 
-# and all inbetween.
 
 i3config="$HOME/.config/i3/config"
-#i3config="/tmp/y.sh"
 
 # Array for i3config Workspace names
 declare -a WSpaces=("")
@@ -23,14 +11,7 @@ getWorkspaceConfigNames () {
 	do
 		[[ $line =~ $re1 ]] && WSpaces+=("${BASH_REMATCH[1]}${BASH_REMATCH[2]}")
 	done < $i3config
-	########
-	# DEBUG
-	# echo "WSpaces: $WSpaces"
-	# echo "$ws_num: ${WSpaces[$ws_num]}"
-	# echo "No 3: ${WSpaces[3]}"
-	# for i in ${!WSpaces[@]}; do echo "$i :: ${WSpaces[$i]}"; done
-	########
-	# Have a choice here. Call each time, or write out WS_config file
+	
 	[[ -v WSpaces[$ws_num] ]] && echo ${WSpaces[$ws_num]} || echo $ws_num
 }
 
